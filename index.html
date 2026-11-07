@@ -144,8 +144,8 @@
                 <button class="btn" onclick="showPage('thema3')">Versicherungen</button>
             </div>
 
-            <div class="stats-box">
-                <strong>📊 Klick-Statistik (lokal gespeichert):</strong><br>
+           <div class="stats-box" style="display: none;">
+                <strong>Klick-Statistik (lokal gespeichert):</strong><br>
                 • Thema 1: <span id="count-thema1">0</span>x geklickt<br>
                 • Thema 2: <span id="count-thema2">0</span>x geklickt<br>
                 • Thema 3: <span id="count-thema3">0</span>x geklickt<br>
@@ -197,30 +197,23 @@
     </div>
 
     <script>
-        // Klick-Daten aus dem Browser-Speicher laden (erscheint lokal im Browser als "Datenbank")
         let clickLogs = JSON.parse(localStorage.getItem('mvp_click_logs')) || [];
         updateStatsAndLog();
         
-        // Funktion zum Umschalten und Protokollieren
         function showPage(pageId) {
-            // Wenn ein Button der 3 Themen geklickt wurde, Datum & Button loggen
-            if (['Vorsorgevollmacht&Patientenverfügung', 'Lohnabrechnung', 'Versicherung'].includes(pageId)) {
-                const now = new Date().toLocaleString('de-DE'); // Datum & Uhrzeit
-                clickLogs.unshift({ button: pageId, time: now }); // Neuen Eintrag oben hinzufügen
-                
-                // Im lokalen Speicher sichern
+            if (['thema1', 'thema2', 'thema3'].includes(pageId)) {
+                const now = new Date().toLocaleString('de-DE');
+                clickLogs.unshift({ button: pageId, time: now });
                 localStorage.setItem('mvp_click_logs', JSON.stringify(clickLogs));
                 updateStatsAndLog();
             }
         
-            // Seiten umschalten
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0, 0);
         }
         
-        // Funktion zur Aktualisierung der Anzeige
         function updateStatsAndLog() {
             let counts = { thema1: 0, thema2: 0, thema3: 0 };
             

@@ -156,27 +156,34 @@
 
         <!-- UNTERSEITE 1 -->
         <div id="thema1" class="page">
-            <h1>Thema 1: Produktidee & Vision</h1>
+            <h1>Thema 1: Vorsorgevollmacht und Patientenverfügung</h1>
             <div class="subpage-content">
-                <p><strong>Hier stehen die Details zu Thema 1.</strong></p>
-                <p>Auf dieser Unterseite könntest du erklären, was das Kernproblem deiner Plattform ist und welche Lösung du anbietest.</p>
+                <p><strong>Vorsorgevolllmacht</strong></p>
+                <p>Warum? Eine Vorsorgevollmacht bestimmt Vertraute statt fremder Betreuer für den Ernstfall.</p>
+                <p>Ab wann nötig? Ab 18. Lebensjahr</p>
+                <p>Link: <a href="https://www.bmjv.de/DE/service/formulare/form_vorsorgevollmacht/form_vorsorgevollmacht_node.html" target="_blank">Vorsorgevollmacht (BJMV)</a></p>
+                <br>
+                <p><strong>Patientenverfügung</strong></p>
+                <p>Warum? Eine Patientenverfügung bestimmt im Voraus, welche medizinischen Behandlungen im Ernstfall gewünscht oder abgelehnt werden.</p>
+                <p>Ab wann nötig? Ab 18. Lebensjahr</p>
+                <p>Link: <a href="https://www.bmjv.de/DE/service/formulare/form_patientenverfuegung/form_patientenverfuegung_node.html" target="_blank">Vorsorgevollmacht (BJMV)</a></p>
             </div>
             <button class="btn btn-back" onclick="showPage('home')">← Zurück zur Übersicht</button>
         </div>
 
         <!-- UNTERSEITE 2 -->
         <div id="thema2" class="page">
-            <h1>Thema 2: Zielgruppe & Markt</h1>
+            <h1>Lohnabrechnung verstehen</h1>
             <div class="subpage-content">
-                <p><strong>Hier stehen die Details zu Thema 2.</strong></p>
-                <p>Hier erfährst du, wer die genaue Zielgruppe ist, welche Bedürfnisse sie hat und warum genau dieses Angebot gebraucht wird.</p>
+                <p><strong>Lohnabrechnung</strong></p>
+                <p>Steuerabzug: Lohnsteuer (individuell), Kirchensteuer (8% oder o), Solidaritätszuschlag (erst, wenn Lohnsteuer mehr als 1.000,- EUR)</p>
             </div>
             <button class="btn btn-back" onclick="showPage('home')">← Zurück zur Übersicht</button>
         </div>
 
         <!-- UNTERSEITE 3 -->
         <div id="thema3" class="page">
-            <h1>Thema 3: Nächste Schritte (MVP)</h1>
+            <h1>Versicherungen</h1>
             <div class="subpage-content">
                 <p><strong>Hier stehen die Details zu Thema 3.</strong></p>
                 <p>Wie wird das Ganze getestet? Hier beschreibst du die Umsetzung der ersten minimalistischen Version (wie z. B. diese Test-Webseite).</p>
@@ -194,7 +201,7 @@
         // Funktion zum Umschalten und Protokollieren
         function showPage(pageId) {
             // Wenn ein Button der 3 Themen geklickt wurde, Datum & Button loggen
-            if (['thema1', 'thema2', 'thema3'].includes(pageId)) {
+            if (['Vorsorgevollmacht&Patientenverfügung', 'Lohnabrechnung', 'Versicherung'].includes(pageId)) {
                 const now = new Date().toLocaleString('de-DE'); // Datum & Uhrzeit
                 clickLogs.unshift({ button: pageId, time: now }); // Neuen Eintrag oben hinzufügen
                 

@@ -144,15 +144,15 @@
                 <button class="btn" onclick="showPage('thema3')">Versicherungen</button>
             </div>
 
-           <div class="stats-box" style="display: none;">
-                <strong>Klick-Statistik (lokal gespeichert):</strong><br>
-                • Thema 1: <span id="count-thema1">0</span>x geklickt<br>
-                • Thema 2: <span id="count-thema2">0</span>x geklickt<br>
-                • Thema 3: <span id="count-thema3">0</span>x geklickt<br>
-                <strong style="display:inline-block; margin-top:8px;">Letzte Aktivitäten:</strong>
-            <ul id="log-list"></ul>
-    </div>
+           <div id="secret-stats" style="display: none; margin-top: 40px; padding: 20px; background: #1e293b; color: #fff; border-radius: 8px;">
+                <h3>🔒 Admin-Statistik</h3>
+                <p>Thema 1: <span id="admin-count-1">0</span>x</p>
+                <p>Thema 2: <span id="admin-count-2">0</span>x</p>
+                <p>Thema 3: <span id="admin-count-3">0</span>x</p>
+                <button onclick="clearStats()" style="background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Statistik zurücksetzen</button>
+            </div>
         </div>
+    </div>
 
         <!-- UNTERSEITE 1 -->
         <div id="thema1" class="page">
@@ -211,7 +211,8 @@
     <script>
         let clickLogs = JSON.parse(localStorage.getItem('mvp_click_logs')) || [];
         updateStatsAndLog();
-        
+    
+        // Funktion zum Umschalten und Protokollieren
         function showPage(pageId) {
             if (['thema1', 'thema2', 'thema3'].includes(pageId)) {
                 const now = new Date().toLocaleString('de-DE');
@@ -219,29 +220,49 @@
                 localStorage.setItem('mvp_click_logs', JSON.stringify(clickLogs));
                 updateStatsAndLog();
             }
-        
+    
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0, 0);
         }
-        
+    
+        // Funktion zur Aktualisierung (falls das Admin-Fenster offen ist)
         function updateStatsAndLog() {
             let counts = { thema1: 0, thema2: 0, thema3: 0 };
-            
             clickLogs.forEach(entry => {
                 if (counts[entry.button] !== undefined) {
                     counts[entry.button]++;
                 }
             });
-        
-            if (document.getElementById('count-thema1')) {
-                document.getElementById('count-thema1').textContent = counts.thema1;
-                document.getElementById('count-thema2').textContent = counts.thema2;
-                document.getElementById('count-thema3').textContent = counts.thema3;
-        
-                let listHtml = clickLogs.slice(0, 5).map(entry => `<li>${entry.time}: ${entry.button}</li>`).join('');
-                document.getElementById('log-list').innerHTML = listHtml || '<li>Noch keine Klicks</li>';
+    
+            if (document.getElementById('admin-count-1')) {
+                document.getElementById('admin-count-1').textContent = counts.thema1;
+                document.getElementById('admin-count-2').textContent = counts.thema2;
+                document.getElementById('admin-count-3').textContent = counts.thema3;
+            }
+        }
+    
+        // HIER KOMMT ER HIN: Tastenkombination Strg + Shift + S öffnet die versteckte Statistik
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && event.shiftKey && event.key === 'S') {
+                const statsBox = document.getElementById('secret-stats');
+                if (statsBox.style.display === 'none') {
+                    statsBox.style.display = 'block';
+                    updateStatsAndLog(); // Werte beim Öffnen aktualisieren
+                } else {
+                    statsBox.style.display = 'none';
+                }
+            }
+        });
+    
+        // Funktion zum Zurücksetzen der Statistik
+        function clearStats() {
+            if(confirm("Statistik wirklich löschen?")) {
+                localStorage.removeItem('mvp_click_logs');
+                clickLogs = [];
+                updateStatsAndLog();
+                alert("Zurückgesetzt!");
             }
         }
     </script>

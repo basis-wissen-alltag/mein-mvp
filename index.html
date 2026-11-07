@@ -187,19 +187,47 @@
     </div>
 
     <script>
-        // Funktion zum Umschalten zwischen den "Unterseiten"
+        // Klick-Daten aus dem Browser-Speicher laden (erscheint lokal im Browser als "Datenbank")
+        let clickLogs = JSON.parse(localStorage.getItem('mvp_click_logs')) || [];
+        updateStatsAndLog();
+        
+        // Funktion zum Umschalten und Protokollieren
         function showPage(pageId) {
-            // Alle Seiten ausblenden
+            // Wenn ein Button der 3 Themen geklickt wurde, Datum & Button loggen
+            if (['thema1', 'thema2', 'thema3'].includes(pageId)) {
+                const now = new Date().toLocaleString('de-DE'); // Datum & Uhrzeit
+                clickLogs.unshift({ button: pageId, time: now }); // Neuen Eintrag oben hinzufügen
+                
+                // Im lokalen Speicher sichern
+                localStorage.setItem('mvp_click_logs', JSON.stringify(clickLogs));
+                updateStatsAndLog();
+            }
+        
+            // Seiten umschalten
             const pages = document.querySelectorAll('.page');
-            pages.forEach(page => {
-                page.classList.remove('active');
-            });
-
-            // Gewünschte Seite einblenden
+            pages.forEach(page => page.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
-            
-            // Nach oben scrollen bei Seitenwechsel
             window.scrollTo(0, 0);
+        }
+        
+        // Funktion zur Aktualisierung der Anzeige
+        function updateStatsAndLog() {
+            let counts = { thema1: 0, thema2: 0, thema3: 0 };
+            
+            clickLogs.forEach(entry => {
+                if (counts[entry.button] !== undefined) {
+                    counts[entry.button]++;
+                }
+            });
+        
+            if (document.getElementById('count-thema1')) {
+                document.getElementById('count-thema1').textContent = counts.thema1;
+                document.getElementById('count-thema2').textContent = counts.thema2;
+                document.getElementById('count-thema3').textContent = counts.thema3;
+        
+                let listHtml = clickLogs.slice(0, 5).map(entry => `<li>${entry.time}: ${entry.button}</li>`).join('');
+                document.getElementById('log-list').innerHTML = listHtml || '<li>Noch keine Klicks</li>';
+            }
         }
     </script>
 

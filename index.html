@@ -226,6 +226,21 @@
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0, 0);
         }
+                // Funktion zur Aktualisierung (falls das Admin-Fenster offen ist)
+        function updateStats() {
+            let counts = { thema1: 0, thema2: 0, thema3: 0 };
+            clickLogs.forEach(entry => {
+                if (counts[entry.button] !== undefined) {
+                    counts[entry.button]++;
+                }
+            });
+    
+            if (document.getElementById('admin-count-1')) {
+                document.getElementById('admin-count-1').textContent = counts.thema1;
+                document.getElementById('admin-count-2').textContent = counts.thema2;
+                document.getElementById('admin-count-3').textContent = counts.thema3;
+            }
+        }
     </script>
 
 </body>

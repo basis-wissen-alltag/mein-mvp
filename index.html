@@ -12,6 +12,31 @@
             --card-bg: #ffffff;
             --text-color: #1e293b;
         }
+        
+        .main-title {
+            text-align: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-color);
+        }
+        
+        .stats-box {
+            margin-top: 30px;
+            text-align: left;
+            background: #f1f5f9;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #475569;
+        }
+        
+        .stats-box ul {
+            margin: 5px 0 0 0;
+            padding-left: 20px;
+            max-height: 100px;
+            overflow-y: auto;
+        }
 
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -108,14 +133,25 @@
         
         <!-- HAUPTSEITE -->
         <div id="home" class="page active">
+            <h1 class="main-title">Basiswissen über alltägliche Pflichtthemen</h1>
+            
             <h1>Wähle dein Thema</h1>
             <p>Klicke auf einen Bereich, um die jeweilige Unterseite zu öffnen.</p>
             
             <div class="button-group">
-                <button class="btn" onclick="showPage('thema1')">Thema 1: Produktidee & Vision</button>
-                <button class="btn" onclick="showPage('thema2')">Thema 2: Zielgruppe & Markt</button>
-                <button class="btn" onclick="showPage('thema3')">Thema 3: Nächste Schritte (MVP)</button>
+                <button class="btn" onclick="showPage('thema1')">Vorsorgevollmacht und Patientenverfügung</button>
+                <button class="btn" onclick="showPage('thema2')">Lohnabrechnung verstehen</button>
+                <button class="btn" onclick="showPage('thema3')">Versicherungen</button>
             </div>
+
+            <div class="stats-box">
+                <strong>📊 Klick-Statistik (lokal gespeichert):</strong><br>
+                • Thema 1: <span id="count-thema1">0</span>x geklickt<br>
+                • Thema 2: <span id="count-thema2">0</span>x geklickt<br>
+                • Thema 3: <span id="count-thema3">0</span>x geklickt<br>
+                <strong style="display:inline-block; margin-top:8px;">Letzte Aktivitäten:</strong>
+            <ul id="log-list"></ul>
+    </div>
         </div>
 
         <!-- UNTERSEITE 1 -->

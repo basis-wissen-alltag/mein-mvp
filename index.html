@@ -184,4 +184,13 @@
 
     <script>
         // Funktion zum reinen Umschalten der Seiten
-        function showPage(pageId
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+
+</body>
+</html>

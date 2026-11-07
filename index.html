@@ -208,7 +208,7 @@
 
     </div>
 
-               <!-- <script>
+    <script>
         let clickLogs = JSON.parse(localStorage.getItem('mvp_click_logs')) || [];
         updateStatsAndLog();
     
@@ -226,46 +226,7 @@
             document.getElementById(pageId).classList.add('active');
             window.scrollTo(0, 0);
         }
-    
-        // Funktion zur Aktualisierung (falls das Admin-Fenster offen ist)
-        function updateStatsAndLog() {
-            let counts = { thema1: 0, thema2: 0, thema3: 0 };
-            clickLogs.forEach(entry => {
-                if (counts[entry.button] !== undefined) {
-                    counts[entry.button]++;
-                }
-            });
-    
-            if (document.getElementById('admin-count-1')) {
-                document.getElementById('admin-count-1').textContent = counts.thema1;
-                document.getElementById('admin-count-2').textContent = counts.thema2;
-                document.getElementById('admin-count-3').textContent = counts.thema3;
-            }
-        }
-    
-        // HIER KOMMT ER HIN: Tastenkombination Strg + Shift + S öffnet die versteckte Statistik
-        document.addEventListener('keydown', function(event) {
-            if (event.ctrlKey && event.shiftKey && event.key === 'x') {
-                const statsBox = document.getElementById('secret-stats');
-                if (statsBox.style.display === 'none') {
-                    statsBox.style.display = 'block';
-                    updateStatsAndLog(); // Werte beim Öffnen aktualisieren
-                } else {
-                    statsBox.style.display = 'none';
-                }
-            }
-        });
-    
-        // Funktion zum Zurücksetzen der Statistik
-        function clearStats() {
-            if(confirm("Statistik wirklich löschen?")) {
-                localStorage.removeItem('mvp_click_logs');
-                clickLogs = [];
-                updateStatsAndLog();
-                alert("Zurückgesetzt!");
-            }
-        }
-    </script>-->
+    </script>
 
 </body>
 </html>

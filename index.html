@@ -20,23 +20,6 @@
             margin-bottom: 20px;
             color: var(--text-color);
         }
-        
-        .stats-box {
-            margin-top: 30px;
-            text-align: left;
-            background: #f1f5f9;
-            padding: 15px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            color: #475569;
-        }
-        
-        .stats-box ul {
-            margin: 5px 0 0 0;
-            padding-left: 20px;
-            max-height: 100px;
-            overflow-y: auto;
-        }
 
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -143,30 +126,21 @@
                 <button class="btn" onclick="showPage('thema2')">Lohnabrechnung verstehen</button>
                 <button class="btn" onclick="showPage('thema3')">Versicherungen</button>
             </div>
-
-           <!-- <div id="secret-stats" style="display: none; margin-top: 40px; padding: 20px; background: #1e293b; color: #fff; border-radius: 8px;">
-                <h3>🔒 Admin-Statistik</h3>
-                <p>Thema 1: <span id="admin-count-1">0</span>x</p>
-                <p>Thema 2: <span id="admin-count-2">0</span>x</p>
-                <p>Thema 3: <span id="admin-count-3">0</span>x</p>
-                <button onclick="clearStats()" style="background: #ef4444; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer;">Statistik zurücksetzen</button>
-            </div> -->
         </div>
-    </div>
 
         <!-- UNTERSEITE 1 -->
         <div id="thema1" class="page">
             <h1>Thema 1: Vorsorgevollmacht und Patientenverfügung</h1>
             <div class="subpage-content">
-                <p><strong>Vorsorgevolllmacht</strong></p>
+                <p><strong>Vorsorgevollmacht</strong></p>
                 <p>Warum? Eine Vorsorgevollmacht bestimmt Vertraute statt fremder Betreuer für den Ernstfall.</p>
                 <p>Ab wann nötig? Ab 18. Lebensjahr</p>
-                <p>Link: <a href="https://www.bmjv.de/DE/service/formulare/form_vorsorgevollmacht/form_vorsorgevollmacht_node.html" target="_blank">Vorsorgevollmacht (BJMV)</a></p>
+                <p>Link: <a href="https://www.bmjv.de/DE/service/formulare/form_vorsorgevollmacht/form_vorsorgevollmacht_node.html" target="_blank">Vorsorgevollmacht (BMJV)</a></p>
                 <br>
                 <p><strong>Patientenverfügung</strong></p>
                 <p>Warum? Eine Patientenverfügung bestimmt im Voraus, welche medizinischen Behandlungen im Ernstfall gewünscht oder abgelehnt werden.</p>
                 <p>Ab wann nötig? Ab 18. Lebensjahr</p>
-                <p>Link: <a href="https://www.bmjv.de/DE/service/formulare/form_patientenverfuegung/form_patientenverfuegung_node.html" target="_blank">Vorsorgevollmacht (BJMV)</a></p>
+                <p>Link: <a href="https://www.bmjv.de/DE/service/formulare/form_patientenverfuegung/form_patientenverfuegung_node.html" target="_blank">Patientenverfügung (BMJV)</a></p>
             </div>
             <button class="btn btn-back" onclick="showPage('home')">← Zurück zur Übersicht</button>
         </div>
@@ -179,7 +153,7 @@
                 <p>Steuerabzug<br>
                     - Lohnsteuer (individueller Prozentsatz)<br>
                     - Kirchensteuer (8% oder 9%)<br>
-                    - Solidaritätszuschlag (erst, wenn Lohnsteuer >= 1.695 EUR)
+                    - Solidaritätszuschlag (erst, wenn Lohnsteuer mehr als 1.000,- EUR)
                 </p>
                 <p>Sozialversicherungsbeiträge<br>
                     - Krankenversicherung (KV): 7,3%<br>
@@ -209,39 +183,5 @@
     </div>
 
     <script>
-        let clickLogs = JSON.parse(localStorage.getItem('mvp_click_logs')) || [];
-        updateStatsAndLog();
-    
-        // Funktion zum Umschalten und Protokollieren
-        function showPage(pageId) {
-            if (['thema1', 'thema2', 'thema3'].includes(pageId)) {
-                const now = new Date().toLocaleString('de-DE');
-                clickLogs.unshift({ button: pageId, time: now });
-                localStorage.setItem('mvp_click_logs', JSON.stringify(clickLogs));
-                updateStatsAndLog();
-            }
-    
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            window.scrollTo(0, 0);
-        }
-                // Funktion zur Aktualisierung (falls das Admin-Fenster offen ist)
-        function updateStats() {
-            let counts = { thema1: 0, thema2: 0, thema3: 0 };
-            clickLogs.forEach(entry => {
-                if (counts[entry.button] !== undefined) {
-                    counts[entry.button]++;
-                }
-            });
-    
-            if (document.getElementById('admin-count-1')) {
-                document.getElementById('admin-count-1').textContent = counts.thema1;
-                document.getElementById('admin-count-2').textContent = counts.thema2;
-                document.getElementById('admin-count-3').textContent = counts.thema3;
-            }
-        }
-    </script>
-
-</body>
-</html>
+        // Funktion zum reinen Umschalten der Seiten
+        function showPage(pageId
